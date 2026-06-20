@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro - Modern Library Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Background Decoration -->
+    <div class="bg-glow"></div>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="brand">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div>
+                    <h1>Library Book Manager</h1>
+                    <p>Manage, organize and track your library collection efficiently.</p>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="btn-icon" title="Toggle Dark Mode">
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+                <button id="open-add-modal" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Add New Book
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Stats Dashboard -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+                <div class="stat-info"><span id="stat-total">0</span><label>Total Books</label></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                <div class="stat-info"><span id="stat-available">0</span><label>Available</label></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                <div class="stat-info"><span id="stat-issued">0</span><label>Issued</label></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+                <div class="stat-info"><span id="stat-categories">0</span><label>Categories</label></div>
+            </div>
+        </section>
+
+        <!-- Filters and Controls -->
+        <section class="controls-bar glass">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="search-input" placeholder="Search by title or author...">
+            </div>
+            <div class="filter-group">
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-Fiction">Non-Fiction</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Business">Business</option>
+                    <option value="Biography">Biography</option>
+                </select>
+                <select id="sort-select">
+                    <option value="newest">Newest First</option>
+                    <option value="az">Title A-Z</option>
+                    <option value="za">Title Z-A</option>
+                </select>
+                <div class="action-btns">
+                    <button id="export-btn" class="btn btn-outline" title="Export JSON">Export</button>
+                    <label for="import-input" class="btn btn-outline">Import</label>
+                    <input type="file" id="import-input" accept=".json" hidden>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Display Area -->
+        <section id="book-grid" class="book-grid">
+            <!-- Cards will be injected here -->
+        </section>
+
+        <!-- Empty State -->
+        <section id="empty-state" class="empty-state hidden">
+            <img src="./Buecher-coloured.svg" alt="No books">
+            <h3>Your library is empty</h3>
+            <p>Start adding books to manage your collection!</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Libro Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Add Book Modal -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h2>Add New Book</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="add-book-form">
+                <div class="form-group">
+                    <label>Book Name</label>
+                    <input type="text" id="book-name" placeholder="Enter book title" required>
+                </div>
+                <div class="form-group">
+                    <label>Author Name</label>
+                    <input type="text" id="book-author" placeholder="Enter author name" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="book-category" required>
+                        <option value="">Select Category</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Business">Business</option>
+                        <option value="Biography">Biography</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content glass modal-sm">
+            <div class="modal-header">
+                <h2 class="text-danger">Delete Book</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <strong id="delete-book-title"></strong>? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-delete">Cancel</button>
+                <button id="confirm-delete-btn" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
