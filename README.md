@@ -4,7 +4,7 @@ A modern and user-friendly Library Book Management System built using JavaScript
 
 ## 🚀 Live Demo
 
-🔗 https://rahulkumar-dev255.github.io/Library-book-manager/
+🔗 https://rahulkumar-dev255.github.io/Library-book-manager-/
 
 ---
 
@@ -54,13 +54,13 @@ Library-book-manager/
 1. Clone the repository
 
 ```bash
-git clone https://github.com/rahulkumar-dev255/Library-book-manager.git
+git clone https://github.com/rahulkumar-dev255/Library-book-manager-.git
 ```
 
 2. Navigate to the project folder
 
 ```bash
-cd Library-book-manager
+cd Library-book-manager-
 ```
 
 3. Open `index.html` in your browser.
@@ -81,7 +81,7 @@ This project was developed to strengthen understanding of:
 ---
 
 ## 📸 Screenshot
-<img src="Screenshot 2026-06-19 194855.png">
+<img src="./Screenshot 2026-06-20 140653.png">
 
 
 
